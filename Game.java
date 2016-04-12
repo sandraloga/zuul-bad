@@ -45,12 +45,12 @@ public class Game
         cafeteria = new Room ("cafeteria");
 
         // initialise room exits
-        entrada.setExits(null, null, null, bolas,null);
-        bolas.setExits(null, entrada, bicis, null,atracciones);
-        bicis.setExits(bolas, atracciones, cafeteria, null,null);
-        atracciones.setExits(null, videojuegos, cafeteria, bicis,null);
-        videojuegos.setExits(null, null, null, atracciones,null);
-        cafeteria.setExits (atracciones,null,null,null,null);
+        entrada.setExits(null, null, null, bolas,null,null);
+        bolas.setExits(null, entrada, bicis, null,atracciones,null);
+        bicis.setExits(bolas, atracciones, cafeteria, null,null,null);
+        atracciones.setExits(null, videojuegos, cafeteria, bicis,null,bolas);
+        videojuegos.setExits(null, null, null, atracciones,null,null);
+        cafeteria.setExits (atracciones,null,null,null,null,null);
 
         currentRoom = entrada;  // start game outside
     }
