@@ -49,7 +49,6 @@ public class Room
         salidas.put(direction,neighbor);
     }
 
-
     public Room getExit(String direcion)
     {
         Room roomDeVuelta  = null;
@@ -103,8 +102,21 @@ public class Room
         if ( salidas.get("northWest") != null){
             salida += "northWest ";
         }
+        
         return salida;
 
     }
+    /**
+     * Return a long description of this room, of the form:
+     *     You are in the 'name of room'
+     *     Exits: north west southwest
+     * @return A description of the room, including exits.
+     */
+    public String getLongDescription()
+    {
+      return "You are in the " + description + "\n" +  getExitString();  
+    
+    }
+
 
 }
