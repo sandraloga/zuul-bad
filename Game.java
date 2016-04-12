@@ -45,12 +45,28 @@ public class Game
         cafeteria = new Room ("cafeteria");
 
         // initialise room exits
-        entrada.setExits(null, null, null, bolas,null,null);
-        bolas.setExits(null, entrada, bicis, null,atracciones,null);
-        bicis.setExits(bolas, atracciones, cafeteria, null,null,null);
-        atracciones.setExits(null, videojuegos, cafeteria, bicis,null,bolas);
-        videojuegos.setExits(null, null, null, atracciones,null,null);
-        cafeteria.setExits (atracciones,null,null,null,null,null);
+
+        entrada.setExit("west",bolas);
+        entrada.setExit("southEast",videojuegos);
+
+        bolas.setExit("east",entrada);
+        bolas.setExit("south",bicis);
+        bolas.setExit("southEast",atracciones);
+
+        bicis.setExit("north",bolas);
+        bicis.setExit("east",atracciones);
+        bicis.setExit("southEast",cafeteria);
+
+        atracciones.setExit("northWest",bolas);
+        atracciones.setExit("west",bicis);
+        atracciones.setExit("east",videojuegos);
+        atracciones.setExit("south",cafeteria);
+
+        videojuegos.setExit("northWest",entrada);
+        videojuegos.setExit("west",atracciones);
+
+        cafeteria.setExit("north",atracciones);
+        cafeteria.setExit("northWest",bicis);
 
         currentRoom = entrada;  // start game outside
     }
@@ -83,7 +99,7 @@ public class Game
         System.out.println("World of Zuul is a new, incredibly boring adventure game.");
         System.out.println("Type 'help' if you need help.");
         System.out.println();
-        
+
         printLocationInfo();
 
         System.out.println();
@@ -148,10 +164,8 @@ public class Game
         String direction = command.getSecondWord();
 
         // Try to leave current room.
-        
-        
-        Room nextRoom = currentRoom.getExit(direction);
 
+        Room nextRoom = currentRoom.getExit(direction);
         if (nextRoom == null) {
             System.out.println("There is no door!");
         }

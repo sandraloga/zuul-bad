@@ -18,7 +18,6 @@ public class Room
 {
     private String description;
     private HashMap<String,Room> salidas;
-   
 
     /**
      * Create a room described "description". Initially, it has
@@ -33,33 +32,6 @@ public class Room
     }
 
     /**
-     * Define the exits of this room.  Every direction either leads
-     * to another room or is null (no exit there).
-     * @param north The north exit.
-     * @param east The east east.
-     * @param south The south exit.
-     * @param west The west exit.
-     */
-    public void setExits(Room north, Room east, Room south, Room west, Room southEast , Room northWest) 
-    {
-        if(north != null)
-            salidas.put("north",north);
-        if(east != null)
-            salidas.put("east",east);
-        if(south != null)
-            salidas.put("south",south);
-        if(west != null)
-            salidas.put("west",west);
-        if (west != null)
-           salidas.put("west",west);
-        if (southEast != null)
-            salidas.put("southEast",southEast);
-        if (northWest != null)
-           salidas.put("northWest",northWest);
-
-    }
-
-    /**
      * @return The description of the room.
      */
     public String getDescription()
@@ -67,6 +39,17 @@ public class Room
         return description;
     }
 
+    /**
+     * Define an exit from this room.
+     * @param direction The direction of the exit.
+     * @param neighbor The room in the given direction.
+     */
+    public void setExit(String direction, Room neighbor)
+    {
+        salidas.put(direction,neighbor);
+    }
+
+
     public Room getExit(String direcion)
     {
         Room roomDeVuelta  = null;
@@ -86,9 +69,9 @@ public class Room
             roomDeVuelta = salidas.get("southEast");
         }
         if (direcion.equals("northWest")){
-             roomDeVuelta = salidas.get("northWest");
+            roomDeVuelta = salidas.get("northWest");
         }
-       
+
         return roomDeVuelta;
 
     }
@@ -121,7 +104,7 @@ public class Room
             salida += "northWest ";
         }
         return salida;
-    
+
     }
 
 }
