@@ -37,12 +37,12 @@ public class Game
         Room entrada, bolas, bicis,atracciones,videojuegos,cafeteria;
 
         // create the rooms
-        entrada = new Room("hall de entrada");
-        bolas = new Room("sala de bolas");
-        bicis = new Room("circuito de bicicletas");
-        atracciones = new Room("sala de atrracciones");
-        videojuegos = new Room("sala de videojuegos");
-        cafeteria = new Room ("cafeteria");
+        entrada = new Room("hall de entrada","perchero",10.5);
+        bolas = new Room("sala de bolas","zapatero",15.5);
+        bicis = new Room("circuito de bicicletas","conos de trafico",0.5);
+        atracciones = new Room("sala de atracciones","sillon", 25.7);
+        videojuegos = new Room("sala de videojuegos","pantalla 3D",5.3);
+        cafeteria = new Room ("cafeteria","taburete",2.7);
 
         // initialise room exits
 
@@ -129,6 +129,12 @@ public class Game
         else if (commandWord.equals("quit")) {
             wantToQuit = quit(command);
         }
+        else if (commandWord.equals("look")) {
+            System.out.println(currentRoom.getLongDescription());
+        }
+        else if (commandWord.equals("eat")) {
+            System.out.println ("You have eaten now and you are not hungry any more");
+        }
 
         return wantToQuit;
     }
@@ -146,7 +152,7 @@ public class Game
         System.out.println("around at the university.");
         System.out.println();
         System.out.println("Your command words are:");
-        System.out.println("   go quit help");
+        parser.muestraComandos();
     }
 
     /** 
@@ -197,7 +203,7 @@ public class Game
      */
     private void printLocationInfo()
     {
-        System.out.println("You are " + currentRoom.getDescription());
-        System.out.println(currentRoom.getExitString());  
+        System.out.println(currentRoom.getLongDescription());
+        
     }
 }
