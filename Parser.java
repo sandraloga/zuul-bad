@@ -62,11 +62,4 @@ public class Parser
             return new Command(null, word2); 
         }
     }
-    /**
-     * decuelve el atributo commmands
-     */
-    public void muestraComandos()
-    {
-        commands.showAll();
-    }
 }
