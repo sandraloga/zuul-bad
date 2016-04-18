@@ -37,12 +37,31 @@ public class Game
         Room entrada, bolas, bicis,atracciones,videojuegos,cafeteria;
 
         // create the rooms
-        entrada = new Room("hall de entrada","perchero",10.5);
-        bolas = new Room("sala de bolas","zapatero",15.5);
-        bicis = new Room("circuito de bicicletas","conos de trafico",0.5);
-        atracciones = new Room("sala de atracciones","sillon", 25.7);
-        videojuegos = new Room("sala de videojuegos","pantalla 3D",5.3);
-        cafeteria = new Room ("cafeteria","taburete",2.7);
+        entrada = new Room("hall de entrada");
+        bolas = new Room("sala de bolas");
+        bicis = new Room("circuito de bicicletas");
+        atracciones = new Room("sala de atracciones");
+        videojuegos = new Room("sala de videojuegos");
+        cafeteria = new Room ("cafeteria");
+        
+        //creamos items
+         Item itemPerchero =new Item ("perchero", 10.5F); 
+         Item itemTaburete = new Item ("taburete", 5.3F);
+         Item itemZapatero = new Item ("zapatero",15.5F);
+         Item itemBolas = new Item ("bolas gigantes",6.5F);
+         Item itemBanco = new Item ("banco", 7.3F);
+         Item itemConos = new Item ("conos de trafico",0.5F);
+         Item itemBici = new Item ("bici carreras", 15.2F);
+         Item itemTriciclo = new Item ("triciclo",3.2F);
+         Item itemSillon = new Item ("sillon", 25.7F);
+         Item itemEspejo = new Item ("espejo", 5.6F);
+         Item itemBaul = new Item("baúl", 15.6F);
+         Item itemHeroe = new Item ("figura superheroe", 35.9F);
+         Item itemPantalla = new Item("pantalla 3D",5.3F);
+         Item itemSillonE = new Item ("sillón ergonómico", 10.2F);
+         Item itemMesa =new Item ("mesa", 7.5F);
+      
+         
 
         // initialise room exits
 
@@ -67,6 +86,29 @@ public class Game
 
         cafeteria.setExit("north",atracciones);
         cafeteria.setExit("northWest",bicis);
+        
+        // añadimos items
+        entrada.addItem(itemPerchero);
+        entrada.addItem(itemTaburete);
+        
+        bolas.addItem(itemZapatero);
+        bolas.addItem(itemBolas);
+        bolas.addItem(itemBanco);
+        
+        bicis.addItem(itemConos);
+        bicis.addItem(itemBici);
+        bicis.addItem(itemTriciclo);
+        
+        atracciones.addItem(itemSillon);
+        atracciones.addItem(itemEspejo);
+        atracciones.addItem(itemBaul);
+        atracciones.addItem(itemHeroe);
+        
+        videojuegos.addItem(itemPantalla);
+        videojuegos.addItem(itemSillonE);
+        
+        cafeteria.addItem(itemTaburete);
+        cafeteria.addItem(itemMesa);
 
         currentRoom = entrada;  // start game outside
     }
