@@ -1,3 +1,4 @@
+import java.util.Stack;
 /**
  *  This class is the main class of the "World of Zuul" application. 
  *  "World of Zuul" is a very simple, text based adventure game.  Users 
@@ -19,7 +20,7 @@ public class Game
 {
     private Parser parser;
     private Room currentRoom;
-    private Room vuelveAtras;
+    private Stack <Room> salas;
 
     /**
      * Create the game and initialise its internal map.
@@ -44,28 +45,25 @@ public class Game
         atracciones = new Room("sala de atracciones");
         videojuegos = new Room("sala de videojuegos");
         cafeteria = new Room ("cafeteria");
-        
+
         //creamos items
-         Item itemPerchero =new Item ("perchero", 10.5F); 
-         Item itemTaburete = new Item ("taburete", 5.3F);
-         Item itemZapatero = new Item ("zapatero",15.5F);
-         Item itemBolas = new Item ("bolas gigantes",6.5F);
-         Item itemBanco = new Item ("banco", 7.3F);
-         Item itemConos = new Item ("conos de trafico",0.5F);
-         Item itemBici = new Item ("bici carreras", 15.2F);
-         Item itemTriciclo = new Item ("triciclo",3.2F);
-         Item itemSillon = new Item ("sillon", 25.7F);
-         Item itemEspejo = new Item ("espejo", 5.6F);
-         Item itemBaul = new Item("baúl", 15.6F);
-         Item itemHeroe = new Item ("figura superheroe", 35.9F);
-         Item itemPantalla = new Item("pantalla 3D",5.3F);
-         Item itemSillonE = new Item ("sillón ergonómico", 10.2F);
-         Item itemMesa =new Item ("mesa", 7.5F);
-      
-         
+        Item itemPerchero =new Item ("perchero", 10.5F); 
+        Item itemTaburete = new Item ("taburete", 5.3F);
+        Item itemZapatero = new Item ("zapatero",15.5F);
+        Item itemBolas = new Item ("bolas gigantes",6.5F);
+        Item itemBanco = new Item ("banco", 7.3F);
+        Item itemConos = new Item ("conos de trafico",0.5F);
+        Item itemBici = new Item ("bici carreras", 15.2F);
+        Item itemTriciclo = new Item ("triciclo",3.2F);
+        Item itemSillon = new Item ("sillon", 25.7F);
+        Item itemEspejo = new Item ("espejo", 5.6F);
+        Item itemBaul = new Item("baúl", 15.6F);
+        Item itemHeroe = new Item ("figura superheroe", 35.9F);
+        Item itemPantalla = new Item("pantalla 3D",5.3F);
+        Item itemSillonE = new Item ("sillón ergonómico", 10.2F);
+        Item itemMesa =new Item ("mesa", 7.5F);
 
         // initialise room exits
-
         entrada.setExit("west",bolas);
         entrada.setExit("southEast",videojuegos);
 
@@ -87,31 +85,33 @@ public class Game
 
         cafeteria.setExit("north",atracciones);
         cafeteria.setExit("northWest",bicis);
-        
+
         // añadimos items
         entrada.addItem(itemPerchero);
         entrada.addItem(itemTaburete);
-        
+
         bolas.addItem(itemZapatero);
         bolas.addItem(itemBolas);
         bolas.addItem(itemBanco);
-        
+
         bicis.addItem(itemConos);
         bicis.addItem(itemBici);
         bicis.addItem(itemTriciclo);
-        
+
         atracciones.addItem(itemSillon);
         atracciones.addItem(itemEspejo);
         atracciones.addItem(itemBaul);
         atracciones.addItem(itemHeroe);
-        
+
         videojuegos.addItem(itemPantalla);
         videojuegos.addItem(itemSillonE);
-        
+
         cafeteria.addItem(itemTaburete);
         cafeteria.addItem(itemMesa);
 
         currentRoom = entrada;  // start game outside
+        salas = new Stack<>();
+
     }
 
     /**
@@ -179,8 +179,8 @@ public class Game
             System.out.println ("You have eaten now and you are not hungry any more");
         }
         else if (commandWord.equals("back")){
-              back();
-            }
+            back();
+        }
 
         return wantToQuit;
     }
@@ -207,7 +207,7 @@ public class Game
      */
     private void goRoom(Command command) 
     {
-        vuelveAtras = currentRoom;
+        
         if(!command.hasSecondWord()) {
             // if there is no second word, we don't know where to go...
             System.out.println("Go where?");
@@ -223,7 +223,7 @@ public class Game
             System.out.println("There is no door!");
         }
         else {
-            vuelveAtras = currentRoom;
+            salas.push(currentRoom);
             currentRoom = nextRoom;
             printLocationInfo();
             System.out.println();
@@ -252,21 +252,23 @@ public class Game
     private void printLocationInfo()
     {
         System.out.println(currentRoom.getLongDescription());
-        
+
     }
-   /**
-    * 
-    */
-   private void back()
-   {
-       if ( vuelveAtras == null || vuelveAtras==currentRoom)
-       {
-         System.out.println ("No es posible volver a la localización anterior");
+
+    /**
+     * 
+     */
+    private void back()
+    {
+        if ( !salas.empty())
+        {
+            currentRoom = salas.pop();
+            printLocationInfo();
+
         }else
         {
-            currentRoom = vuelveAtras;
-            printLocationInfo();
+            System.out.println ("Estas en la entrada");
         }
-    
+
     }
 }
