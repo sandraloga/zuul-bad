@@ -119,12 +119,12 @@ public class Room
     public String getLongDescription()
     {
         String descripcion = "You are in the " + description + 
-        "\n" +  getExitString();
+            "\n" +  getExitString();
         descripcion += "Hay " + items.size() + " items:\n";
-            
+
         for(Item  item : items)
         {
-           descripcion+= " " + item.descripcionItem() + "\n"; 
+            descripcion+= " " + item.descripcionItem() + "\n"; 
         }
         return descripcion;
     }
@@ -135,6 +135,23 @@ public class Room
     public void addItem(Item item)
     {
         items.add(item);
+    }
+    /**
+     * borra el item especificado de la lista
+     */
+    public Item borrarItem(Item item)
+    {
+        Item itemBuscado =null;
+
+        for (int i=0; i< items.size(); i++)
+        {
+            if (items.get(i).descripcionItem().equals(item))
+            {
+                itemBuscado = items.get(i);
+                items.remove(i);
+            }
+        }
+        return itemBuscado;
     }
 
 }
