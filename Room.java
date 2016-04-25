@@ -139,19 +139,32 @@ public class Room
     /**
      * borra el item especificado de la lista
      */
-    public Item borrarItem(String item)
+    public Item borrarItem(Item item)
     {
         Item itemBuscado =null;
-
-        for (int i=0; i< items.size(); i++)
+        if (item != null)
         {
-            if (items.get(i).descripcionItem().equals(item))
-            {
-                itemBuscado = items.get(i);
-                items.remove(i);
-            }
+            items.remove(item);
         }
         return itemBuscado;
     }
+    
+    /**
+     * bucar item que se quiera
+     */
+    public Item buscarItem(String itemBuscado)
+    {
+        Item itemEncontrado = null;
+        for (Item item : items)
+        {
+            if (item.descripcionItem().equals(itemBuscado))
+            {
+               itemEncontrado = item;
+            }
+            
+        }
+        return itemEncontrado;
+    }
+    
 
 }
