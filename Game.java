@@ -181,6 +181,12 @@ public class Game
         else if (commandWord.equals("back")){
             back();
         }
+        else {
+            if (commandWord.equals("take")){
+                cogerItem(command);
+            }
+
+        }
 
         return wantToQuit;
     }
@@ -207,7 +213,7 @@ public class Game
      */
     private void goRoom(Command command) 
     {
-        
+
         if(!command.hasSecondWord()) {
             // if there is no second word, we don't know where to go...
             System.out.println("Go where?");
@@ -227,6 +233,22 @@ public class Game
             currentRoom = nextRoom;
             printLocationInfo();
             System.out.println();
+        }
+    }
+
+    public void cogerItem (Command command)
+    {
+        if(!command.hasSecondWord()) {
+            // if there is no second word, we don't know where to go...
+            System.out.println("Que quieres coger?");
+            return;
+        }
+        String itemElegido = command.getSecondWord();
+
+        Item item = currentRoom.borrarItem(itemElegido);
+        if (item == null)
+        {
+            System.out.println("Esto no es un item");
         }
     }
 

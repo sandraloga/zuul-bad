@@ -139,7 +139,7 @@ public class Room
     /**
      * borra el item especificado de la lista
      */
-    public Item borrarItem(Item item)
+    public Item borrarItem(String item)
     {
         Item itemBuscado =null;
 
