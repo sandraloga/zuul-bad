@@ -21,6 +21,7 @@ public class Game
     private Parser parser;
     private Room currentRoom;
     private Stack <Room> salas;
+    private Player player;
 
     /**
      * Create the game and initialise its internal map.
@@ -181,11 +182,8 @@ public class Game
         else if (commandWord.equals("back")){
             back();
         }
-        else {
-            if (commandWord.equals("take")){
-                cogerItem(command);
-            }
-
+        else if (commandWord.equals("take")) {
+            cogerItem(command);
         }
 
         return wantToQuit;
@@ -245,11 +243,19 @@ public class Game
         }
         String itemElegido = command.getSecondWord();
 
-        Item item = currentRoom.borrarItem(itemElegido);
+        Item item = currentRoom.buscarItem(itemElegido);
         if (item == null)
         {
-            System.out.println("Esto no es un item");
+            System.out.println("No existe item con ese nombre");
         }
+        else if(player.LIMITE_PESO >= (player.getPesoTotal() + item.getPeso())) {
+            player.addItem(currentRoom.borrarItem(item));
+        }
+        else{
+            System.out.println ("El peso ha sido sobrepasado!!!");
+        }
+        
+        
     }
 
     /** 

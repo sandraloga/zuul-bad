@@ -10,7 +10,7 @@ public class Player
     // instance variables - replace the example below with your own
     private ArrayList<Item> itemsPlayer;
     private float pesoTotal;
-    private static final float LIMITE_PESO= 50;
+    public static final float LIMITE_PESO= 50;
 
     /**
      * Constructor for objects of class Player

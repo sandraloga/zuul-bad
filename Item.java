@@ -28,5 +28,12 @@ public class Item
         return  descripcion + " peso: " + peso + "Kg";
     }
 
-    
+    /**
+     * 
+     */
+    public float getPeso()
+    {
+        return peso;
+    }
+  
 }
