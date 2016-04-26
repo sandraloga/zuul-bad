@@ -124,7 +124,8 @@ public class Room
 
         for(Item  item : items)
         {
-            descripcion+= " " + item.descripcionItem() + "\n"; 
+            descripcion+= " " + item.descripcionItem() +" " + item.getPeso() +
+            "kg" + "\n"; 
         }
         return descripcion;
     }
@@ -141,7 +142,7 @@ public class Room
      */
     public Item borrarItem(Item item)
     {
-        Item itemBuscado =null;
+        Item itemBuscado =item;
         if (item != null)
         {
             items.remove(item);
@@ -165,6 +166,7 @@ public class Room
         }
         return itemEncontrado;
     }
+    
     
 
 }

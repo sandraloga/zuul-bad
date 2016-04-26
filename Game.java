@@ -1,4 +1,4 @@
-import java.util.Stack;
+
 /**
  *  This class is the main class of the "World of Zuul" application. 
  *  "World of Zuul" is a very simple, text based adventure game.  Users 
@@ -19,8 +19,6 @@ import java.util.Stack;
 public class Game 
 {
     private Parser parser;
-    private Room currentRoom;
-    private Stack <Room> salas;
     private Player player;
 
     /**
@@ -30,6 +28,7 @@ public class Game
     {
         createRooms();
         parser = new Parser();
+        
     }
 
     /**
@@ -109,18 +108,18 @@ public class Game
 
         cafeteria.addItem(itemTaburete);
         cafeteria.addItem(itemMesa);
-
-        currentRoom = entrada;  // start game outside
-        salas = new Stack<>();
+        
+        player = new Player(entrada);
 
     }
+   
 
     /**
      *  Main play routine.  Loops until end of play.
      */
     public void play() 
     {            
-        printWelcome();
+       player.printWelcome();
 
         // Enter the main command loop.  Here we repeatedly read commands and
         // execute them until the game is over.
@@ -133,21 +132,7 @@ public class Game
         System.out.println("Thank you for playing.  Good bye.");
     }
 
-    /**
-     * Print out the opening message for the player.
-     */
-    private void printWelcome()
-    {
-        System.out.println();
-        System.out.println("Welcome to the World of Zuul!");
-        System.out.println("World of Zuul is a new, incredibly boring adventure game.");
-        System.out.println("Type 'help' if you need help.");
-        System.out.println();
-
-        printLocationInfo();
-
-        System.out.println();
-    }
+   
 
     /**
      * Given a command, process (that is: execute) the command.
@@ -168,22 +153,25 @@ public class Game
             printHelp();
         }
         else if (commandWord.equals("go")) {
-            goRoom(command);
+            player.goRoom(command);
         }
         else if (commandWord.equals("quit")) {
             wantToQuit = quit(command);
         }
         else if (commandWord.equals("look")) {
-            System.out.println(currentRoom.getLongDescription());
+            System.out.println(player.getCurrentRoom().getLongDescription());
         }
         else if (commandWord.equals("eat")) {
             System.out.println ("You have eaten now and you are not hungry any more");
         }
         else if (commandWord.equals("back")){
-            back();
+           player.back();
         }
         else if (commandWord.equals("take")) {
-            cogerItem(command);
+            player.cogerItem(command);
+        }
+        else if (commandWord.equals("drop")){
+            player.drop(command);
         }
 
         return wantToQuit;
@@ -205,58 +193,9 @@ public class Game
         parser.muestraComandos();
     }
 
-    /** 
-     * Try to go in one direction. If there is an exit, enter
-     * the new room, otherwise print an error message.
-     */
-    private void goRoom(Command command) 
-    {
+    
 
-        if(!command.hasSecondWord()) {
-            // if there is no second word, we don't know where to go...
-            System.out.println("Go where?");
-            return;
-        }
-
-        String direction = command.getSecondWord();
-
-        // Try to leave current room.
-
-        Room nextRoom = currentRoom.getExit(direction);
-        if (nextRoom == null) {
-            System.out.println("There is no door!");
-        }
-        else {
-            salas.push(currentRoom);
-            currentRoom = nextRoom;
-            printLocationInfo();
-            System.out.println();
-        }
-    }
-
-    public void cogerItem (Command command)
-    {
-        if(!command.hasSecondWord()) {
-            // if there is no second word, we don't know where to go...
-            System.out.println("Que quieres coger?");
-            return;
-        }
-        String itemElegido = command.getSecondWord();
-
-        Item item = currentRoom.buscarItem(itemElegido);
-        if (item == null)
-        {
-            System.out.println("No existe item con ese nombre");
-        }
-        else if(player.LIMITE_PESO >= (player.getPesoTotal() + item.getPeso())) {
-            player.addItem(currentRoom.borrarItem(item));
-        }
-        else{
-            System.out.println ("El peso ha sido sobrepasado!!!");
-        }
-        
-        
-    }
+   
 
     /** 
      * "Quit" was entered. Check the rest of the command to see
@@ -274,29 +213,9 @@ public class Game
         }
     }
 
-    /**
-     * 
-     */
-    private void printLocationInfo()
-    {
-        System.out.println(currentRoom.getLongDescription());
+    
 
-    }
-
-    /**
-     * 
-     */
-    private void back()
-    {
-        if ( !salas.empty())
-        {
-            currentRoom = salas.pop();
-            printLocationInfo();
-
-        }else
-        {
-            System.out.println ("Estas en la entrada");
-        }
-
-    }
+    
+    
+   
 }
