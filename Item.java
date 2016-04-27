@@ -8,8 +8,8 @@
 public class Item
 {
     // instance variables - replace the example below with your own
-    private float peso;
     private String descripcion;
+    private float peso;
 
     /**
      * Constructor for objects of class Item
@@ -25,8 +25,15 @@ public class Item
      */
     public String descripcionItem()
     {
-        return  descripcion + " peso: " + peso + "Kg";
+        return  descripcion;
     }
 
-    
+    /**
+     * 
+     */
+    public float getPeso()
+    {
+        return peso;
+    }
+  
 }
