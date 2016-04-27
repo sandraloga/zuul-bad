@@ -28,7 +28,7 @@ public class Game
     {
         createRooms();
         parser = new Parser();
-        
+
     }
 
     /**
@@ -50,17 +50,17 @@ public class Game
         Item itemPerchero =new Item ("perchero", 10.5F); 
         Item itemTaburete = new Item ("taburete", 5.3F);
         Item itemZapatero = new Item ("zapatero",15.5F);
-        Item itemBolas = new Item ("bolas gigantes",6.5F);
+        Item itemBolas = new Item ("bolas",6.5F);
         Item itemBanco = new Item ("banco", 7.3F);
-        Item itemConos = new Item ("conos de trafico",0.5F);
-        Item itemBici = new Item ("bici carreras", 15.2F);
+        Item itemConos = new Item ("conos",0.5F);
+        Item itemBici = new Item ("bici", 15.2F);
         Item itemTriciclo = new Item ("triciclo",3.2F);
         Item itemSillon = new Item ("sillon", 25.7F);
         Item itemEspejo = new Item ("espejo", 5.6F);
         Item itemBaul = new Item("baúl", 15.6F);
-        Item itemHeroe = new Item ("figura superheroe", 35.9F);
-        Item itemPantalla = new Item("pantalla 3D",5.3F);
-        Item itemSillonE = new Item ("sillón ergonómico", 10.2F);
+        Item itemHeroe = new Item ("superheroe", 35.9F);
+        Item itemPantalla = new Item("pantalla",5.3F);
+        Item itemSillonE = new Item ("sillón", 10.2F);
         Item itemMesa =new Item ("mesa", 7.5F);
 
         // initialise room exits
@@ -108,18 +108,17 @@ public class Game
 
         cafeteria.addItem(itemTaburete);
         cafeteria.addItem(itemMesa);
-        
+
         player = new Player(entrada);
 
     }
-   
 
     /**
      *  Main play routine.  Loops until end of play.
      */
     public void play() 
     {            
-       player.printWelcome();
+        player.printWelcome();
 
         // Enter the main command loop.  Here we repeatedly read commands and
         // execute them until the game is over.
@@ -132,7 +131,6 @@ public class Game
         System.out.println("Thank you for playing.  Good bye.");
     }
 
-   
 
     /**
      * Given a command, process (that is: execute) the command.
@@ -165,13 +163,16 @@ public class Game
             System.out.println ("You have eaten now and you are not hungry any more");
         }
         else if (commandWord.equals("back")){
-           player.back();
+            player.back();
         }
         else if (commandWord.equals("take")) {
             player.cogerItem(command);
         }
         else if (commandWord.equals("drop")){
             player.drop(command);
+        }
+        else if (commandWord.equals("items")){
+            System.out.println(player.muestraItems());
         }
 
         return wantToQuit;
@@ -193,9 +194,7 @@ public class Game
         parser.muestraComandos();
     }
 
-    
 
-   
 
     /** 
      * "Quit" was entered. Check the rest of the command to see
@@ -213,9 +212,6 @@ public class Game
         }
     }
 
-    
 
     
-    
-   
 }

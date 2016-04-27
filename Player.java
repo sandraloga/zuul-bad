@@ -108,6 +108,7 @@ public class Player
         }
 
     }
+
     /**
      * elimina el item y lo deja en la sala
      */
@@ -207,6 +208,28 @@ public class Player
 
         }
         return itemEncontrado;
+    }
+
+    /**
+     * muestra los items que tiene el jugador
+     */
+    public String muestraItems()
+    {
+        String descripcion = "Peso: " + getPesoTotal() + 
+            "\n" + "Los items que tienes son: "  + "\n";
+        if (itemsPlayer.size()==0)
+        {
+            descripcion += "No hay items" + ".\n";
+        }else
+        {
+
+            for(Item  item : itemsPlayer)
+            {
+                descripcion+= "El nombre del item es: " + item.descripcionItem()+
+                    " y su peso es : " + item.getPeso() + ".\n";
+            }
+        }
+        return descripcion;
     }
 
     /**
