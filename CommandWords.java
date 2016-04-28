@@ -45,6 +45,22 @@ public class CommandWords
     }
 
     /**
+     * Return the object Option associated with a word.
+     * @param commandWord The word to look up (as a string).
+     * @return the object Option correspondng to the paramater commandWord, or the object Option.UNKNOWN
+     *         if it is not a valid command word
+     */
+    public Option getCommandWord(String commandWord)
+    {
+        Option optionValido = null;
+        if (isCommand(commandWord))
+        {
+            optionValido=comandos.get(commandWord);
+        }
+        return optionValido;
+    }
+
+    /**
      * Print all valid commands to System.out
      */
     public void showAll()
