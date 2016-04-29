@@ -11,7 +11,7 @@ public class Player
     // instance variables - replace the example below with your own
     private ArrayList<Item> itemsPlayer;
     private float pesoTotal;
-    public static final float LIMITE_PESO = 50;   
+    public static final float LIMITE_PESO = 10;   
     private Room currentRoom;
     private Stack <Room> salas;
 
@@ -99,6 +99,9 @@ public class Player
         if (item == null)
         {
             System.out.println("No existe item con ese nombre");
+        }
+        else if  (!item.getProhibido()){
+            System.out.println("Este item no se puede coger");    
         }
         else if(LIMITE_PESO >= getPesoTotal() + item.getPeso()) {
             addItem(currentRoom.borrarItem(item));

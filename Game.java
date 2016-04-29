@@ -47,21 +47,21 @@ public class Game
         cafeteria = new Room ("cafeteria");
 
         //creamos items
-        Item itemPerchero =new Item ("perchero", 10.5F); 
-        Item itemTaburete = new Item ("taburete", 5.3F);
-        Item itemZapatero = new Item ("zapatero",15.5F);
-        Item itemBolas = new Item ("bolas",6.5F);
-        Item itemBanco = new Item ("banco", 7.3F);
-        Item itemConos = new Item ("conos",0.5F);
-        Item itemBici = new Item ("bici", 15.2F);
-        Item itemTriciclo = new Item ("triciclo",3.2F);
-        Item itemSillon = new Item ("sillon", 25.7F);
-        Item itemEspejo = new Item ("espejo", 5.6F);
-        Item itemBaul = new Item("baúl", 15.6F);
-        Item itemHeroe = new Item ("superheroe", 35.9F);
-        Item itemPantalla = new Item("pantalla",5.3F);
-        Item itemSillonE = new Item ("sillón", 10.2F);
-        Item itemMesa =new Item ("mesa", 7.5F);
+         Item itemPerchero =new Item ("perchero", 10.5F,false); 
+        Item itemTaburete = new Item ("taburete", 5.3F,true);
+        Item itemZapatero = new Item ("zapatero",15.5F,false);
+        Item itemBolas = new Item ("bolas",6.5F,true);
+        Item itemBanco = new Item ("banco", 7.3F,true);
+        Item itemConos = new Item ("conos",0.5F,false);
+        Item itemBici = new Item ("bici", 15.2F,true);
+        Item itemTriciclo = new Item ("triciclo",3.2F,true);
+        Item itemSillon = new Item ("sillon", 25.7F,true);
+        Item itemEspejo = new Item ("espejo", 5.6F,true);
+        Item itemBaul = new Item("baúl", 15.6F , false);
+        Item itemHeroe = new Item ("superheroe", 35.9F,true);
+        Item itemPantalla = new Item("pantalla",5.3F,false);
+        Item itemSillonE = new Item ("sillón", 10.2F,true);
+        Item itemMesa =new Item ("mesa", 7.5F,false);
 
         // initialise room exits
         entrada.setExit("west",bolas);

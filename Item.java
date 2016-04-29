@@ -10,14 +10,16 @@ public class Item
     // instance variables - replace the example below with your own
     private String descripcion;
     private float peso;
+     private boolean prohibido;
 
     /**
      * Constructor for objects of class Item
      */
-    public Item(String descripcion ,float peso)
+    public Item(String descripcion ,float peso , boolean prohibido)
     {
         this.descripcion = descripcion;
         this.peso = peso;
+        this.prohibido = prohibido;
     }
     
     /**
@@ -34,6 +36,13 @@ public class Item
     public float getPeso()
     {
         return peso;
+    }
+    
+    
+    
+    public boolean getProhibido()
+    {
+        return prohibido;
     }
   
 }
