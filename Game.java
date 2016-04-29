@@ -47,7 +47,7 @@ public class Game
         cafeteria = new Room ("cafeteria");
 
         //creamos items
-         Item itemPerchero =new Item ("perchero", 10.5F,false); 
+        Item itemPerchero =new Item ("perchero", 10.5F,false); 
         Item itemTaburete = new Item ("taburete", 5.3F,true);
         Item itemZapatero = new Item ("zapatero",15.5F,false);
         Item itemBolas = new Item ("bolas",6.5F,true);
@@ -131,7 +131,6 @@ public class Game
         System.out.println("Thank you for playing.  Good bye.");
     }
 
-
     /**
      * Given a command, process (that is: execute) the command.
      * @param command The command to be processed.
@@ -147,39 +146,42 @@ public class Game
         }
 
         Option commandWord = command.getCommandWord();
-        if (commandWord == Option.HELP) {
-            printHelp();
-        }
-        else if (commandWord ==Option.GO) {
-            player.goRoom(command);
-        }
-        else if (commandWord == Option.QUIT) {
-            wantToQuit = quit(command);
-        }
-        else if (commandWord == Option.LOOK) {
-            System.out.println(player.getCurrentRoom().getLongDescription());
-        }
-        else if (commandWord == Option.EAT) {
-            System.out.println ("You have eaten now and you are not hungry any more");
-        }
-        else if (commandWord == Option.BACK){
-            player.back();
-        }
-        else if (commandWord == Option.TAKE) {
-            player.cogerItem(command);
-        }
-        else if (commandWord == Option.DROP){
-            player.drop(command);
-        }
-        else if (commandWord == Option.ITEMS){
-            System.out.println(player.muestraItems());
-        }
 
+        switch (commandWord)
+        {
+            case HELP:
+            printHelp();
+            break;
+            case GO:
+            player.goRoom(command);
+            break;
+            case QUIT:
+            wantToQuit = quit(command);
+            break;
+            case LOOK:
+            System.out.println(player.getCurrentRoom().getLongDescription());
+            break;
+
+            case EAT:
+            System.out.println ("You have eaten now and you are not hungry any more");
+            break;
+            case BACK:
+            player.back();
+            break;
+            case TAKE:
+            player.cogerItem(command);
+            break;
+            case DROP:
+            player.drop(command);
+            break;
+            case ITEMS:
+            System.out.println(player.muestraItems());
+            break;
+        }
         return wantToQuit;
     }
 
     // implementations of user commands:
-
     /**
      * Print out some help information.
      * Here we print some stupid, cryptic message and a list of the 
@@ -193,8 +195,6 @@ public class Game
         System.out.println("Your command words are:");
         parser.muestraComandos();
     }
-
-
 
     /** 
      * "Quit" was entered. Check the rest of the command to see
@@ -212,6 +212,4 @@ public class Game
         }
     }
 
-
-    
 }
